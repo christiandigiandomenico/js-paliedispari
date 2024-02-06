@@ -1,30 +1,60 @@
-let userChoice1 = prompt("Pari o dispari?")
-let userChoice2 = Number(prompt("Inserisci un numero da 1 a 5"))
+const buttonElement = document.querySelector("#inizia-gioco")
 
-let numberSum = userChoice2 + randomNumber()
+buttonElement.addEventListener("click", function () {
 
-console.log(userChoice1)
-console.log(userChoice2)
-console.log(randomNumber())
-console.log(evenOrOdd())
-console.log(numberSum)
+    let userChoice1;
 
-function randomNumber() {
+    userChoice1 = prompt("Pari o Dispari?")
 
-    return Math.floor(Math.random() * 5) + 1;
+    while (!(userChoice1 === "Pari" || userChoice1 === "Dispari")) {
+        userChoice1 = prompt("Valore non valido, inserisci Pari o Dispari")
+    }
 
-}
+    let userChoice2;
 
-function evenOrOdd() {
+    userChoice2 = Number(prompt("Inserisci un numero da 1 a 5"));
 
-    if (numberSum % 2 == 0) {
+    while (userChoice2 < 1 || userChoice2 > 5 || isNaN(userChoice2)) {
+        userChoice2 = prompt("Valore non valido, inserisci un numero da 1 a 5")
+    }
 
-        return "pari"
+    let numRnd = randomNumber();
 
+    let numberSum = userChoice2 + numRnd
+
+    let esito = evenOrOdd(numberSum)
+
+
+    if (userChoice1 == esito) {
+        document.getElementById("result").innerHTML = ("Il numero uscito è " + numberSum + " hai vinto!")
     } else {
+        document.getElementById("result").innerHTML = ("Il numero uscito è " + numberSum + " hai perso!")
+    }
 
-        return "dispari"
+    // console.log(userChoice1)
+    // console.log(userChoice2)
+    // console.log(numRnd)
+    // console.log(evenOrOdd(numberSum))
+    // console.log(numberSum)
+
+    function randomNumber() {
+
+        return Math.floor(Math.random() * 5) + 1;
 
     }
 
-}
+    function evenOrOdd(variabile) {
+
+        if (variabile % 2 == 0) {
+
+            return "Pari"
+
+        } else {
+
+            return "Dispari"
+
+        }
+
+    }
+
+})
